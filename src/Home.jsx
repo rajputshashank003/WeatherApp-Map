@@ -67,21 +67,22 @@ function Home() {
         updateWeatherInfo={updateInfo}
         ColorValue={ColorValue}
       />
+      <br/><br/>
       <div style={{
-        height :"83.9vh",
+        height :"100%",
         display:"flex", 
         justifyContent:"center" , 
         alignItems: "center",
         flexDirection: "row",
         flexWrap: "wrap" ,
       }}>
+        <InfoBox weatherInfo={weatherInfo} ColorValue={ColorValue}/>
         <BingMap 
             coordinates={coordinates}  
             weatherInfo={weatherInfo} 
             ColorValue={ColorValue}
             updateCoordinates={updateCoordinates}
         />
-        <InfoBox weatherInfo={weatherInfo} ColorValue={ColorValue}/>
       </div>
     </div>
   )

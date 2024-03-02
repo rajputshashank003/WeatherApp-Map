@@ -53,7 +53,7 @@ export default function SearchBox({coordinates,city, updateLocation,updateCoordi
         throw err;  
     }
   };
-
+  
   const showError = (msg) => {
     toast.error(msg);
   };
