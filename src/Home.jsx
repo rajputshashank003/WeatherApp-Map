@@ -36,22 +36,13 @@ function Home() {
   let updateBgColor = () => {
     setColorValue( (lst) => {
         if(lst.bgColor === "white"){
-            showSuccess("Switched to Dark Mode");
             return {bgColor: "#242424", fColor:"white", mapColor:"aerial"};
         } else {
-            showSuccess("Switched to Bright Mode");
             return {bgColor: "white", fColor:"Black", mapColor:"road"};
         }
     });
 
   }
-
-  const showError = (msg) => {
-    toast.error(msg);
-  };
-  const showSuccess = (msg) => {
-      toast.success(msg);
-  };
   // useEffect(() => {}, [coordinates]); 
   // useEffect(() => {}, [city]); 
   // useEffect(() =>{}, [weatherInfo]);
@@ -59,7 +50,12 @@ function Home() {
   
   return (
     <div style={{backgroundColor: ColorValue.bgColor}}>
-      <Switch onChange={updateBgColor} {...label} defaultChecked/>
+      <Switch 
+        style={{color: ColorValue.bgColor === 'white' ? "#242424" : "white" }} 
+        onChange={updateBgColor} 
+        {...label} 
+        defaultChecked
+      />
       <span style={{color: ColorValue.bgColor === 'white' ? "black" : "white", fontFamily:"Sans-Serif"}}>
         Switch to {ColorValue.bgColor === 'white' ? "Dark" : "Bright"}  
       </span>
