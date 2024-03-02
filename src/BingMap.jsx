@@ -40,7 +40,7 @@ function BingMap({coordinates , weatherInfo , ColorValue  }) {
 
     const getPointCity = async (a,b) => {
       try {
-        const response = await fetch(`http://api.openweathermap.org/geo/1.0/reverse?lat=${a}&lon=${b}&appid=${import.meta.env.VITE_WEATHER_KEY}`);
+        const response = await fetch(`https://api.openweathermap.org/geo/1.0/reverse?lat=${a}&lon=${b}&appid=${import.meta.env.VITE_WEATHER_KEY}`);
         const data = await response.json();
         getWeatherInfo(data[0].name);
       } catch (err){
@@ -58,7 +58,6 @@ function BingMap({coordinates , weatherInfo , ColorValue  }) {
       updateTempCoordinates([location.latitude, location.longitude]);
       getPointCity(location.latitude, location.longitude)
     };
-    var infoboxTemplate = '<div class="customInfobox"><div class="title">{title}</div>{description}</div>';
 
   return (
         <div className="map-one">
