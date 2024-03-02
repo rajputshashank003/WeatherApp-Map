@@ -1,0 +1,22 @@
+.map-one{
+	width: 50%;
+	height: 415px;
+	padding: 0px;
+	margin-right: 2%;
+	margin-top:2%;
+	margin-bottom : 2%;
+}
+
+@media (max-width: 730px) {
+	.map-one {
+		width: 345px;
+		justify-content: center;
+	}
+}
+
+.infobox-container {
+	background-color: black;
+	color: white;
+	padding: 10px;
+  }
+  
