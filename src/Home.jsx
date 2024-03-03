@@ -2,15 +2,15 @@ import {React, useState, useEffect} from "react";
 import BingMap from "./BingMap.jsx"; // Correct import path and filename
 import SearchBox  from "./SearchBox.jsx";
 import InfoBox from "./InfoBox.jsx";
+import SideMenu from "./SideMenu.jsx";
+
 import "./Home.css";
-import Switch from '@mui/material/Switch';
-const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
 function Home() {
+  const [MenuState, setMenuState] = useState(false);
   const [ColorValue , setColorValue] = useState({bgColor:"#242424", fColor:"white", mapColor:"aerial"});   
   const [city, setLocation] = useState('delhi');
   const [coordinates, setCoordinates] = useState([28.64339066, 77.11547852]);
@@ -23,6 +23,12 @@ function Home() {
     tempMin : 17.05,
     weather : "smoke",
   });
+
+  let updateMenuState = (newOpen) => {
+    setMenuState ( () => {
+      return newOpen;
+    });
+  }
 
   let updateInfo = (newInfo) => {
     setWeatherInfo(newInfo);
@@ -41,24 +47,15 @@ function Home() {
             return {bgColor: "white", fColor:"Black", mapColor:"road"};
         }
     });
-
   }
+
   // useEffect(() => {}, [coordinates]); 
   // useEffect(() => {}, [city]); 
   // useEffect(() =>{}, [weatherInfo]);
 
   
   return (
-    <div style={{backgroundColor: ColorValue.bgColor}}>
-      <Switch 
-        style={{color: ColorValue.bgColor === 'white' ? "#242424" : "white" }} 
-        onChange={updateBgColor} 
-        {...label} 
-        defaultChecked
-      />
-      <span style={{color: ColorValue.bgColor === 'white' ? "black" : "white", fontFamily:"Sans-Serif"}}>
-        Switch to {ColorValue.bgColor === 'white' ? "Dark" : "Bright"}  
-      </span>
+    <div style={{backgroundColor: ColorValue.bgColor}}>      
       <SearchBox 
         coordinates={coordinates} 
         city={city} 
@@ -66,6 +63,9 @@ function Home() {
         updateCoordinates={updateCoordinates}
         updateWeatherInfo={updateInfo}
         ColorValue={ColorValue}
+        updateBgColor={updateBgColor}
+        MenuState={MenuState}
+        updateMenuState={updateMenuState}
       />
       <br/><br/>
       <div style={{
