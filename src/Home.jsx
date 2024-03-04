@@ -1,32 +1,27 @@
 import {React, useState, useEffect} from "react";
-import BingMap from "./BingMap.jsx"; // Correct import path and filename
+import BingMap from "./BingMap.jsx"; 
 import SearchBox  from "./SearchBox.jsx";
 import InfoBox from "./InfoBox.jsx";
-import SideMenu from "./SideMenu.jsx";
-
 import "./Home.css";
-
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 function Home() {
   const [MenuState, setMenuState] = useState(false);
   const [ColorValue , setColorValue] = useState({bgColor:"#242424", fColor:"white", mapColor:"aerial"});   
-  const [city, setLocation] = useState('delhi');
+  const [city, setLocation] = useState('Delhi');
   const [coordinates, setCoordinates] = useState([28.64339066, 77.11547852]);
   const [weatherInfo , setWeatherInfo] = useState({
     city : "Delhi",
-    feelsLike : 16.35,
-    humidity : 59,
-    temp : 17.05,
-    tempMax : 17.05,
-    tempMin : 17.05,
-    weather : "smoke",
+    feelsLike : 0.00,
+    humidity : 0,
+    temp : 0.00,
+    tempMax : 0.00,
+    tempMin : 0.00,
+    weather : "null",
   });
 
-  let updateMenuState = (newOpen) => {
+  let updateMenuState = (newMenuState) => {
     setMenuState ( () => {
-      return newOpen;
+      return newMenuState;
     });
   }
 
@@ -52,10 +47,30 @@ function Home() {
   // useEffect(() => {}, [coordinates]); 
   // useEffect(() => {}, [city]); 
   // useEffect(() =>{}, [weatherInfo]);
-
+  useEffect( () => {
+    async function getWeatherInfo (city) {
+      try {
+          let response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${import.meta.env.VITE_WEATHER_KEY}&units=metric`);
+          let jsonResponse = await response.json();
+          let result = {
+              city : city ,
+              temp : jsonResponse.main.temp,
+              tempMin : jsonResponse.main.temp_min,
+              tempMax : jsonResponse.main.temp_max,
+              humidity : jsonResponse.main.humidity,
+              feelsLike : jsonResponse.main.feels_like,
+              weather : jsonResponse.weather[0].description,
+          };
+          updateInfo(result);  
+      } catch (err){
+          throw err;  
+      }
+    };
+    getWeatherInfo(city);
+  }, []);
   
   return (
-    <div style={{backgroundColor: ColorValue.bgColor}}>      
+    <div className="Home" style={{backgroundColor: ColorValue.bgColor}}>      
       <SearchBox 
         coordinates={coordinates} 
         city={city} 

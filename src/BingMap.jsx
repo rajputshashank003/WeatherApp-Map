@@ -20,7 +20,8 @@ function BingMap({coordinates , weatherInfo , ColorValue  }) {
 
     let getWeatherInfo = async (city) => {
       try {
-          let response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${import.meta.env.VITE_WEATHER_KEY}&units=metric`);
+          // let response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${import.meta.env.VITE_WEATHER_KEY}&units=metric`);
+          let response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${tempCoordinates[0]}&lon=${tempCoordinates[1]}&appid=${import.meta.env.VITE_WEATHER_KEY}&units=metric`)
           let jsonResponse = await response.json();
           let result = {
               city : city ,

@@ -8,6 +8,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ThemeButton from './ThemeButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import SwipeLeftIcon from '@mui/icons-material/SwipeLeft';
+import Divider from '@mui/material/Divider';
 
 export default function SideMenu( {MenuState , updateMenuState, ColorValue, updateBgColor} ) {
     const DrawerList = (
@@ -27,6 +28,7 @@ export default function SideMenu( {MenuState , updateMenuState, ColorValue, upda
         <Button onClick={() => {updateMenuState(true)}}><MenuIcon /></Button>
         <Drawer open={MenuState} onClose={() => {updateMenuState(false)}} sx={{ '& .MuiDrawer-paper': { backgroundColor: ColorValue.bgColor} }} >
           <Button onClick={() => { updateMenuState(false); }}><SwipeLeftIcon/></Button>
+          <Divider sx={{ height: 0.0001, m: 0 , backgroundColor:ColorValue.fColor }} orientation="horizontal" />
           {DrawerList}
         </Drawer>
       </div>
